@@ -13,8 +13,11 @@ function App() {
   return (
     <div className="App">
       <h1>hello world!</h1>
-      <input value={input} onChange={event => setInput(event.target.value)}/>
-      <button onClick={addToDo} >Add Todo</button>
+      <form>
+        <input value={input} onChange={event => setInput(event.target.value)}/>
+        <button onClick={addToDo} >Add Todo</button>
+      </form>
+
 
       <ul>
         {todos.map(todo => (
