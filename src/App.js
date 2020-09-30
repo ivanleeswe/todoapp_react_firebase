@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from '@material-ui/core';
 import './App.css';
 
 function App() {
@@ -6,8 +7,9 @@ function App() {
   const [input, setInput] = useState('');
 
   const addToDo = (event) => {
-    console.log('asdadasdWOOOO')
+    event.preventDefault();
     setTodos([...todos, input])
+    setInput('');
   }
 
   return (
@@ -15,7 +17,7 @@ function App() {
       <h1>hello world!</h1>
       <form>
         <input value={input} onChange={event => setInput(event.target.value)}/>
-        <button onClick={addToDo} >Add Todo</button>
+        <Button type="submit" onClick={addToDo} variant="contained" color="primary">Add Todo</Button>
       </form>
 
 
