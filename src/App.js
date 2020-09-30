@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(['Take dogs for a walk', 'Take trash out']);
 
   return (
     <div className="App">
@@ -11,8 +11,9 @@ function App() {
       <button>Add Todo</button>
 
       <ul>
-        <li>Take dogs for a walk</li>
-        <li>Take trash out</li>
+        {todos.map(todo => (
+          <li>{todo}</li>
+        )) }
       </ul>
 
     </div>
