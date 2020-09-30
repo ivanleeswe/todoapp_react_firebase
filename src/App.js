@@ -5,11 +5,16 @@ function App() {
   const [todos, setTodos] = useState(['Take dogs for a walk', 'Take trash out', 'Jump rope']);
   const [input, setInput] = useState('');
 
+  const addToDo = (event) => {
+    console.log('asdadasdWOOOO')
+    setTodos([...todos, input])
+  }
+
   return (
     <div className="App">
       <h1>hello world!</h1>
       <input value={input} onChange={event => setInput(event.target.value)}/>
-      <button>Add Todo</button>
+      <button onClick={addToDo} >Add Todo</button>
 
       <ul>
         {todos.map(todo => (
