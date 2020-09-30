@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import './App.css';
+import Todo from './Todo'
 
 function App() {
   const [todos, setTodos] = useState(['Take dogs for a walk', 'Take trash out', 'Jump rope']);
@@ -28,7 +29,7 @@ function App() {
 
       <ul>
         {todos.map(todo => (
-          <li>{todo}</li>
+          <Todo text={todo}/>
         )) }
       </ul>
 
