@@ -10,10 +10,8 @@ function App() {
   const [input, setInput] = useState('');
 
   //when app loads, listen to db and fetch new todos as they get added/removed
-  useEffect(() => {
-    //this code fires when app.js loads
-    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
-      //every time db changes, gives you snapshot of db
+  useEffect(() => { //this code fires when app.js loads
+    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => { //every time db changes, gives you snapshot of db
       setTodos(snapshot.docs.map(doc => doc.data().todo)) //docs: every single todo added //doc: every single doc //allows us to read from db
     });
 
@@ -33,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <h1>hello world!</h1>
-      
+
       <form>
         <FormControl>
           <InputLabel>Write a todo</InputLabel>
