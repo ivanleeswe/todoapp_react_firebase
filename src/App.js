@@ -12,7 +12,7 @@ function App() {
   //when app loads, listen to db and fetch new todos as they get added/removed
   useEffect(() => { //this code fires when app.js loads
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => { //every time db changes, gives you snapshot of db
-      setTodos(snapshot.docs.map(doc => doc.data().todo)) //docs: every single todo added //doc: every single doc //allows us to read from db
+      setTodos(snapshot.docs.map(doc =>({id: doc.id, todo: doc.data().todo}))) //docs: every single todo added //doc: every single doc //allows us to read from db
     });
 
   }, []);
@@ -44,7 +44,7 @@ function App() {
 
       <ul>
         {todos.map(todo => (
-          <Todo text={todo}/>
+          <Todo todo={todo}/>
         )) }
       </ul>
 
