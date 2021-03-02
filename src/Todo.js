@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { List, ListItem, ListItemText, ListItemAvatar, Modal, Button } from '@material-ui/core';
+import { List, ListItem, ListItemText, Modal, Button } from '@material-ui/core';
 import db from './firebase';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,11 +17,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Todo(props) {
-  const classes=useStyles();
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const handleOpen = () =>{
-    setOpen(true);
+  const [input, setInput] = useState();
+
+  // const handleOpen = () =>{
+  //   setOpen(true);
+  // }
+
+  const updateTodo= () => {
+    //Update Todowith new input text
+    db.collection('todos').doc(props.todo.id).set({
+      todo: input
+    }, { merge: true }); //merge true prevents from overwriting what was in there
+    setOpen(false);
   }
+  
 
   return (
     <>
@@ -31,15 +42,14 @@ function Todo(props) {
     >
       <div className = {classes.paper}>
         <h1>i am a modal</h1>
-        <Button onClick={e => setOpen(false)}>Update</Button>
+        <input placeholder={props.todo.todo} value={input} onChange={event => setInput(event.target.value)} />
+        <Button onClick={updateTodo}>Update Todo</Button> 
       </div>
     </Modal>
 
     <List>
       <ListItem>
-        <ListItemAvatar> 
-        </ListItemAvatar>
-        <ListItemText primary={props.todo.todo} secondary="Dummy deadline" />
+        <ListItemText primary={props.todo.todo}  secondary={props.todo.id}/>
       </ListItem>
       <button onClick={e => setOpen(true)}>Edit</button>
       <DeleteForeverIcon onClick={event => { db.collection('todos').doc(props.todo.id).delete()} } />
